@@ -1,7 +1,4 @@
 
-import java.io.Console;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -10,6 +7,7 @@ class User
 {
     private String fullname,username;
     private char[] password;
+    public String[][] user_data=new String[3][10];
     public void registerUser(String f_name,String u_name, char pwd[]) {
 
         String reg_ex = "#[^.#]*[^.#\\s][^#.]*\\.\\w+";
@@ -32,6 +30,12 @@ class User
         fullname=f_name;
         username=u_name;
         password=pwd;
+
+        for (int row=0;row<3;row++){
+                for (int col=0;col<10;col++){
+                    System.out.println(user_data[row][col] + " ");
+                }
+        }
     }
 
     public boolean login(String u_name, char pwd[]) {
@@ -44,11 +48,37 @@ class User
 
         }
     }
+    /*
+
+    for (int i = 0; i < users.length; i++) {
+      if (username.equals(users[i][0]) && password.equals(users[i][1])) {
+        success = true;
+        break;
+      }
+    }
+
+    if (success) {
+      System.out.println("Login successful");
+    } else {
+      System.out.println("Login failed");
+    }
+  }
+
+    for (var row = 0; row < personInfo.length; row++) {
+
+  for (var col = 0; col < personInfo.length; col++) {
+    personInfo[row][col];
+  }
+  if (userName == personInfo[row][col] && passWord == personInfo[row][col]) {
+    document.write("found")
+
+} else {
+    document.write("not found")
+}*/
 
     public static void main(String[] args) {
         // Create the console object
-        Console cnsl = System.console();
-
+        //Console cnsl = System.console();
 
         Scanner sc = new Scanner(System.in);
         User user = new User();
@@ -68,14 +98,17 @@ class User
                     System.out.println("Enter username:");
                     String username = sc.nextLine();
 
-                    char[] password = cnsl.readPassword("pass : ");
+                    //char[] password = cnsl.readPassword("pass : ");
                     //System.out.println("Password : " + password);
-                    //System.out.println("Enter password:");
-                    //String password = sc.nextLine();
-                    user.registerUser(fullname,username, password);
-                    for (int i = 0; i < password.toString().length(); i++) {
+                    /*for (int i = 0; i < password.toString().length(); i++) {
                         System.out.println(password);
-                    }
+                    }*/
+
+                    System.out.println("Enter password:");
+                    String password = sc.nextLine();
+
+                    user.registerUser(fullname,username, password.toCharArray());
+
 
                     //System.out.println("User Registered");
                     break;
@@ -85,26 +118,25 @@ class User
                     System.out.println("Enter username:");
                     username = sc.nextLine();
 
-                    password = cnsl.readPassword(" Enter password : ");
+                    //password = cnsl.readPassword(" Enter password : ");
 
-                    /*System.out.println("Enter password:");
-                    password = sc.nextLine();*/
+                    System.out.println("Enter password:");
+                    password = sc.nextLine();
 
-                    if (user.login(username, password)) {
+                    if (user.login(username, password.toCharArray())) {
                         System.out.println("Login Successful");
                     }
                     else {
-                        System.out.println("PLease Enter Correct Credintials !!");
+                        System.out.println("PLease Enter Correct Credintials !!\n\n");
+                        System.out.println("Press R for Reset Password ...");
                     }
                     break;
 
                 case 3:
-
                     System.out.println("Exiting...");
                     return;
 
                 default:
-
                     System.out.println("Invalid option");
                     break;
             }
